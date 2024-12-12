@@ -6,146 +6,81 @@
     <title>SabConstruct - Construcții de Lux</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Adăugăm stiluri noi pentru un design mai modern și animații */
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-            color: #333;
-        }
-
-        header {
-            background-color: #007BFF;
-            color: white;
-            padding: 20px;
-            text-align: center;
+        /* Stil pentru Pop-up */
+        .popup {
+            display: none;
             position: fixed;
-            width: 100%;
-            top: 0;
+            z-index: 1;
             left: 0;
-            z-index: 10;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
         }
 
-        header img {
-            height: 60px;
+        .popup-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 600px;
         }
 
-        nav ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        nav ul li {
-            display: inline;
-            margin: 0 20px;
-        }
-
-        nav ul li a {
-            color: white;
-            text-decoration: none;
+        .close-btn {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
             font-weight: bold;
         }
 
-        main {
-            margin-top: 100px; /* Pentru a evita header-ul fixat să acopere conținutul */
-        }
-
-        section {
-            padding: 60px 20px;
-            margin: 40px 0;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 1s, transform 1s;
-        }
-
-        section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        h1, h2 {
-            color: #007BFF;
-        }
-
-        .servicii-container {
-            display: flex;
-            justify-content: space-around;
-        }
-
-        .serviciu {
-            background-color: #f0f0f0;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            text-align: center;
-            width: 30%;
-        }
-
-        blockquote {
-            font-style: italic;
-            color: #555;
-        }
-
-        footer {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 20px;
-            position: fixed;
-            width: 100%;
-            bottom: 0;
-        }
-
-        .btn-float {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: #007BFF;
-            color: white;
-            padding: 15px;
-            border-radius: 50%;
-            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        .close-btn:hover,
+        .close-btn:focus {
+            color: black;
+            text-decoration: none;
             cursor: pointer;
         }
 
-        .btn-float:hover {
-            background-color: #0056b3;
+        /* Stil pentru carduri interactive */
+        .card {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 10px;
+            transition: transform 0.3s ease;
         }
 
-        form input, form textarea, form button {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-            border-radius: 5px;
-            border: 1px solid #ccc;
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
 
-        form button {
-            background-color: #007BFF;
+        /* Stil pentru butoane */
+        .popup-btn {
+            padding: 10px 20px;
+            background-color: #4CAF50;
             color: white;
             border: none;
+            border-radius: 5px;
+            cursor: pointer;
         }
 
-        form button:hover {
-            background-color: #0056b3;
+        .popup-btn:hover {
+            background-color: #45a049;
         }
     </style>
 </head>
 <body>
 
     <header>
-        <img src="images/logo.png" alt="Logo SabConstruct">
-        <h1>Bun venit la SabConstruct!</h1>
+        <h1>SabConstruct - Construcții Premium în Stil Mediteranean</h1>
         <nav>
             <ul>
                 <li><a href="#acasa">Acasă</a></li>
-                <li><a href="#despre">Despre</a></li>
+                <li><a href="#proiecte">Proiecte</a></li>
                 <li><a href="#servicii">Servicii</a></li>
-                <li><a href="#testimoniale">Testimoniale</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
@@ -154,113 +89,100 @@
     <main>
         <!-- Secțiunea Acasă -->
         <section id="acasa">
-            <h2>Acasă</h2>
-            <p>Bine ați venit la SabConstruct! Saber Chehne Presedintele companiei ofera soluții premium pentru construcții de lux în stil mediteranean.</p>
-            <img src="images/imagini/logo.png" alt="Logo SabConstruct" style="height: 60px;">
+            <h2>Bun Venit la SabConstruct!</h2>
+            <p>SabConstruct oferă soluții personalizate pentru construcții de lux, punând accent pe calitate, durabilitate și design inovator. Fiecare proiect este realizat cu pasiune și atenție la detalii pentru a satisface cele mai exigente cerințe ale clienților noștri.</p>
+            <button class="popup-btn" onclick="openPopup('popupAcasa')">Detalii</button>
         </section>
 
-        <!-- Secțiunea Despre -->
-        <section id="despre">
-            <h2>Despre SabConstruct</h2>
-            <p>Ne mandrim cu proiectele noastre recente! In cartierul Magnolia Panoramic Craiova! SabConstruct este o firmă specializată în construcția de case și blocuri de lux. Cu o echipă de profesioniști și un portofoliu impresionant, transformăm ideile clienților în realitate.</p>
-            <ul>
-                <li>20+ ani de experiență</li>
-                <li>Proiecte finalizate în timp record</li>
-                <li>Utilizarea materialelor premium</li>
-            </ul>
-        </section>
+        <!-- Pop-up Acasă -->
+        <div id="popupAcasa" class="popup">
+            <div class="popup-content">
+                <span class="close-btn" onclick="closePopup('popupAcasa')">&times;</span>
+                <h3>Mai multe detalii despre SabConstruct</h3>
+                <p>SabConstruct este dedicată realizării de construcții de lux care răspund celor mai înalte standarde. Ne mândrim cu design-ul nostru inovator și cu utilizarea celor mai bune materiale. În fiecare proiect, punem accent pe sustenabilitate și durabilitate.</p>
+            </div>
+        </div>
 
-        <!-- Secțiunea Servicii -->
-        <section id="servicii">
-            <h2>Serviciile Noastre</h2>
-            <div class="servicii-container">
-                <div class="serviciu">
-                    <h3>Construcții de case</h3>
-                    <p>Case de lux în stil mediteranean cu finisaje premium și design unic.</p>
+        <!-- Secțiunea Proiecte -->
+        <section id="proiecte">
+            <h2>Proiectele Noastre</h2>
+            <div class="subpagini">
+                <div class="subpagina card">
+                    <h3>Case Craiova</h3>
+                    <p>Aceste case sunt ideale pentru familii care doresc un spațiu modern și confortabil.</p>
+                    <button class="popup-btn" onclick="openPopup('popupCaseCraiova')">Vezi detalii</button>
                 </div>
-                <div class="serviciu">
-                    <h3>Blocuri rezidențiale</h3>
-                    <p>Dezvoltăm proiecte rezidențiale moderne, adaptate nevoilor urbane.</p>
-                </div>
-                <div class="serviciu">
-                    <h3>Consultanță și proiectare</h3>
-                    <p>Oferim servicii complete de proiectare și consultanță pentru proiectele tale.</p>
+                <div class="subpagina card">
+                    <h3>Vile de Lux</h3>
+                    <p>Vilele noastre de lux oferă finisaje premium și un design elegant.</p>
+                    <button class="popup-btn" onclick="openPopup('popupVileLux')">Vezi detalii</button>
                 </div>
             </div>
         </section>
 
-        <!-- Secțiunea Testimoniale -->
-        <section id="testimoniale">
-            <h2>Ce spun clienții noștri</h2>
-            <blockquote>
-                <p>"SabConstruct ne-a construit casa visurilor noastre! Profesionalism la superlativ."</p>
-                <cite>- Andrei Popescu</cite>
-            </blockquote>
-            <blockquote>
-                <p>"Un partener de încredere pentru orice proiect de construcție. Recomand cu încredere!"</p>
-                <cite>- Maria Ionescu</cite>
-            </blockquote>
+        <!-- Pop-up Case Craiova -->
+        <div id="popupCaseCraiova" class="popup">
+            <div class="popup-content">
+                <span class="close-btn" onclick="closePopup('popupCaseCraiova')">&times;</span>
+                <h3>Detalii despre Casele Craiova</h3>
+                <p>Aceste case sunt construite cu materiale de înaltă calitate și oferă un design modern, perfect pentru familiile care apreciază confortul și stilul.</p>
+            </div>
+        </div>
+
+        <!-- Pop-up Vile Lux -->
+        <div id="popupVileLux" class="popup">
+            <div class="popup-content">
+                <span class="close-btn" onclick="closePopup('popupVileLux')">&times;</span>
+                <h3>Detalii despre Vilele de Lux</h3>
+                <p>Vilele noastre sunt dotate cu facilități premium, oferind un mediu exclusivist și confort maxim.</p>
+            </div>
+        </div>
+
+        <!-- Secțiunea Servicii -->
+        <section id="servicii">
+            <h2>Serviciile Noastre</h2>
+            <ul>
+                <li>Construcții rezidențiale: case și blocuri.</li>
+                <li>Consultanță tehnică și proiectare personalizată.</li>
+                <li>Predare la cheie, gata pentru a fi locuit.</li>
+                <li>Renovări și modernizări pentru proprietăți existente.</li>
+            </ul>
+            <button class="popup-btn" onclick="openPopup('popupServicii')">Vezi mai multe</button>
         </section>
+
+        <!-- Pop-up Servicii -->
+        <div id="popupServicii" class="popup">
+            <div class="popup-content">
+                <span class="close-btn" onclick="closePopup('popupServicii')">&times;</span>
+                <h3>Mai multe despre Serviciile Noastre</h3>
+                <p>Oferim o gamă largă de servicii, de la construcții rezidențiale și comerciale, la consultanță în domeniu și renovări.</p>
+            </div>
+        </div>
 
         <!-- Secțiunea Contact -->
         <section id="contact">
             <h2>Contactează-ne</h2>
-            <p>Email: chehnesaber@gmail.com</p>
-            <p>Telefon: 0765 016 108</p>
-            <form id="contactForm">
-                <label for="nume">Nume:</label>
-                <input type="text" id="nume" name="nume" placeholder="Introdu numele tău">
-                
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" placeholder="Introdu adresa ta de email">
-                
-                <label for="mesaj">Mesaj:</label>
-                <textarea id="mesaj" name="mesaj" placeholder="Scrie mesajul aici"></textarea>
-                
-                <button type="submit">Trimite</button>
-            </form>
+            <p>Dacă dorești să afli mai multe despre serviciile noastre sau să discuți despre proiectul tău, nu ezita să ne contactezi.</p>
+            <ul>
+                <li>Email: chehnesaber@gmail.com</li>
+                <li>Telefon: 0765 016 108</li>
+            </ul>
+            <p>Echipa SabConstruct este aici pentru a răspunde tuturor întrebărilor tale!</p>
         </section>
     </main>
 
     <footer>
-        <p>&copy; 2024 SabConstruct S.R.L. Toate drepturile rezervate.</p>
-        <p>Construit cu pasiune la Craiova.</p>
+        <p>&copy; 2024 SabConstruct S.R.L. Toate drepturile rezervate. Soluții premium pentru construcții de calitate.</p>
     </footer>
 
-    <div class="btn-float" onclick="window.scrollTo(0, 0);">
-        &#8593;
-    </div>
-
     <script>
-        // Funcționalitate pentru animarea secțiunilor
-        document.addEventListener("DOMContentLoaded", () => {
-            const sections = document.querySelectorAll('section');
-            const handleScroll = () => {
-                sections.forEach((section) => {
-                    const rect = section.getBoundingClientRect();
-                    if (rect.top >= 0 && rect.bottom <= window.innerHeight) {
-                        section.classList.add('visible');
-                    }
-                });
-            };
-            window.addEventListener('scroll', handleScroll);
-            handleScroll(); // Rulează o dată la început pentru a anima secțiunile vizibile
-        });
+        function openPopup(id) {
+            document.getElementById(id).style.display = "block";
+        }
 
-        // Validare formular
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const nume = document.getElementById('nume').value;
-            const email = document.getElementById('email').value;
-            const mesaj = document.getElementById('mesaj').value;
-
-            if (!nume || !email || !mesaj) {
-                alert('Toate câmpurile sunt obligatorii!');
-            } else {
-                alert('Mesajul a fost trimis cu succes!');
-                // Aici poți adăuga logica de trimitere a formularului
-            }
-        });
+        function closePopup(id) {
+            document.getElementById(id).style.display = "none";
+        }
     </script>
 
 </body>
